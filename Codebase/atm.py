@@ -1,4 +1,3 @@
-
 # ATM MANAGEMENT SYSTEM
 
 # Default Account Details
@@ -9,7 +8,7 @@ default_balance = 10000
 # Function to save data in file
 def save_data(balance, transactions):
     try:
-        with open("Code/atm.txt", "w") as file:
+        with open("Codebase/atm.txt", "w") as file:
             file.write(str(balance) + "\n")
 
             for transaction in transactions:
@@ -22,7 +21,7 @@ def save_data(balance, transactions):
 # Function to load data from file
 def load_data():
     try:
-        with open("Code/atm.txt", "r") as file:
+        with open("Codebase/atm.txt", "r") as file:
             balance = int(file.readline())
 
             transactions = []
