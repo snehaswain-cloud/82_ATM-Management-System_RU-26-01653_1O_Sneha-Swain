@@ -16,7 +16,8 @@ def save_data(balance, transactions):
 
     except OSError:
         print("Error: Unable to save ATM data!")
-
+    except (ValueError, OSError):
+        print("Error reading file!")
 
 # Function to load data from file
 def load_data():
@@ -136,38 +137,46 @@ else:
     quit()
 
 
+def main():
 # Load previous account data
-balance, transactions = load_data()
+    balance, transactions = load_data()
+
+#ATM Menu:
+    while True:
+        print("\n===== ATM MENU =====")
+        print("1. Check Balance")
+        print("2. Deposit Money")
+        print("3. Withdraw Money")
+        print("4. Mini Statement")
+        print("5. Exit")
 
 
-# ATM Main Menu
-while True:
+        choice = input("Enter your choice: ")
 
-    print("\n===== ATM MENU =====")
-    print("1. Check Balance")
-    print("2. Deposit Money")
-    print("3. Withdraw Money")
-    print("4. Mini Statement")
-    print("5. Exit")
+        if choice == "1":
+            check_balance(balance)
 
-    choice = input("Enter your choice: ")
+        elif choice == "2":
+            balance, transactions = deposit(balance, transactions)
 
-    if choice == "1":
-        check_balance(balance)
+        elif choice == "3":
+            balance, transactions = withdraw(balance, transactions)
 
-    elif choice == "2":
-        balance, transactions = deposit(balance, transactions)
+        elif choice == "4":
+            mini_statement(balance, transactions)
 
-    elif choice == "3":
-        balance, transactions = withdraw(balance, transactions)
+        elif choice == "5":
+            save_data(balance, transactions)
+            print("Thank you for using ATM!")
+            break
 
-    elif choice == "4":
-        mini_statement(balance, transactions)
+        else:
+            print("Invalid choice! Please try again.")
 
-    elif choice == "5":
-        save_data(balance, transactions)
-        print("Thank you for using ATM!")
-        break
 
-    else:
-        print("Invalid choice! Please try again.")
+if __name__== "__main__":
+    main()
+
+
+
+
